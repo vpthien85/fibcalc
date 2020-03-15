@@ -1,0 +1,22 @@
+services:
+  - docker
+
+before_install:
+  - docker build -t vpthien85/react-test -f ./client/dockerfile.dev ./client
+
+script:
+  - docker run vpthien85/react-tes npm test --  --coverage
+
+after_success:
+  - docker build -t vpthien85/fibcalc-client ./client
+  - docker build -t vpthien85/fibcalc-nginx ./nginx
+  - docker build -t vpthien85/fibcalc-server ./server
+  - docker build -t vpthien85/fibcalc-worker ./worker
+  # Log in to docker ci
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push vpthien85/fibcalc-client
+  - docker push vpthien85/fibcalc-nginx
+  - docker push vpthien85/fibcalc-worker
+  - docker push vpthien85/fibcalc-server
+
