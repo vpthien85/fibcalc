@@ -20,6 +20,7 @@ after_success:
   - docker push vpthien85/fibcalc-worker
   - docker push vpthien85/fibcalc-server
 deploy:
+  edge: true
   provider: elasticbeanstalk
   region: ap-southeast-1
   app: fibcalc
@@ -29,7 +30,6 @@ deploy:
   on:
     branch: master
   access_key_id: $AWS_ACCESS_KEY
-  secret_access_key:
-    secure: $AWS_SECRET_KEY
+  secret_access_key: $AWS_SECRET_KEY
 
 
