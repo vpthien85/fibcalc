@@ -1,0 +1,36 @@
+{
+	"AWSEBDockerrunVersion": 2,
+	"containerDefinitions": [
+		{
+			"name": "client",
+			"image": "vpthien85/fibcalc-client",
+			"hostname": "client",
+			"essential": false
+		},
+		{
+			"name": "server",
+			"image": "vpthien85/fibcalc-server",
+			"hostname": "api",
+			"essential": false
+		},
+		{
+			"name": "worker",
+			"image": "vpthien85/fibcalc-worker",
+			"hostname": "worker",
+			"essential": false
+		},
+		{
+			"name": "nginx",
+			"image": "vpthien85/fibcalc-nginx",
+			"hostname": "api",
+			"essential": true,
+			"portMappings": [
+				{
+					"hostPort" : 80,
+					"containerPort": 80
+				}
+			],
+			"links": ["client","server"]
+		}
+	]
+}

@@ -19,4 +19,17 @@ after_success:
   - docker push vpthien85/fibcalc-nginx
   - docker push vpthien85/fibcalc-worker
   - docker push vpthien85/fibcalc-server
+deploy:
+  provider: elasticbeanstalk
+  region: ap-southeast-1
+  app: fibcalc
+  env: Fibcalc-env
+  bucket_name: elasticbeanstalk-ap-southeast-1-221908768714
+  pucket_path: fibcalc
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
+
 
