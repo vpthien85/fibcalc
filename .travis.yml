@@ -14,7 +14,7 @@ after_success:
   - docker build -t vpthien85/fibcalc-worker ./worker
   # Log in to docker ci
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  # Take those images and push them to docker hub
+  # Take those images and push them to docker hub vpthien
   - docker push vpthien85/fibcalc-client
   - docker push vpthien85/fibcalc-nginx
   - docker push vpthien85/fibcalc-worker
